@@ -117,9 +117,9 @@ parkpulse/
 │   ├── 02b_geo_enrichment.py
 │   ├── 03_enforcement_priority.py
 │   ├── 04_time_forecasting.py
-│   ├── 05b_decision_engine.py
-│   ├── 05c_enforcement_mode.py
-│   ├── 06_generate_dashboard_data.py
+│   ├── 05_decision_engine.py
+│   ├── 06_enforcement_mode.py
+│   ├── 07_generate_dashboard_data.py
 │   └── requirements.txt         # Python dependencies
 └── README.md                # This file
 ```
@@ -165,9 +165,9 @@ python scripts/02_hotspot_clustering.py
 python scripts/02b_geo_enrichment.py
 python scripts/03_enforcement_priority.py
 python scripts/04_time_forecasting.py
-python scripts/05b_decision_engine.py
-python scripts/05c_enforcement_mode.py
-python scripts/06_generate_dashboard_data.py
+python scripts/05_decision_engine.py
+python scripts/06_enforcement_mode.py
+python scripts/07_generate_dashboard_data.py
 ```
 
 **4. View Dashboard**
