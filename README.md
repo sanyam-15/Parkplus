@@ -119,8 +119,8 @@ parkpulse/
 │   ├── 04_time_forecasting.py
 │   ├── 05b_decision_engine.py
 │   ├── 05c_enforcement_mode.py
-│   └── 06_generate_dashboard_data.py
-├── requirements.txt         # Python dependencies
+│   ├── 06_generate_dashboard_data.py
+│   └── requirements.txt         # Python dependencies
 └── README.md                # This file
 ```
 
@@ -150,7 +150,7 @@ parkpulse/
 
 **1. Install Dependencies**
 ```bash
-pip install -r requirements.txt
+pip install -r scripts/requirements.txt
 ```
 
 **2. Ensure Data Exists**
