@@ -47,7 +47,6 @@ graph TD;
     B --> D[Geospatial Clustering DBSCAN]
     C --> E[Decision Engine]
     D --> E
-    F[Live Event Data] --> E
     E --> G((Congestion Impact Index CII))
     E --> H((Enforcement Priority EPI))
     G --> I[React Dashboard & Heatmaps]
@@ -79,17 +78,15 @@ sequenceDiagram
     participant Clean as Cleaning Script
     participant Cluster as Hotspot Clustering
     participant ML as XGBoost Forecasting
-    participant Fusion as Event Fusion
     participant Engine as Decision Engine
     participant UI as Dashboard
 
     Data->>Clean: 1. Ingest Raw Violations
     Clean->>Cluster: 2. Cleaned Parking Data
     Cluster->>ML: 3. Identified Hotspots
-    ML->>Fusion: 4. Future Violation Forecasts
-    Fusion->>Engine: 5. Fused with Astram Events
-    Engine->>UI: 6. Calculate CII & EPI
-    UI-->>Engine: 7. Render Insights & Rankings
+    ML->>Engine: 4. Future Violation Forecasts
+    Engine->>UI: 5. Calculate CII & EPI
+    UI-->>Engine: 6. Render Insights & Rankings
 ```
 
 ---
@@ -98,10 +95,12 @@ sequenceDiagram
 
 ```text
 parkpulse/
+├── .gitignore               # Git ignore file
+├── .vercelignore            # Vercel ignore file
 ├── dashboard/               # Frontend React/HTML application
 │   └── index.html           # Main dashboard entry point
 ├── data/                    # Datasets (Place raw CSV here)
-│   ├── jan_to_may_police_violation_anonymized.csv
+│   └── jan_to_may_police_violation_anonymized.csv
 ├── outputs/                 # Generated artifacts, models, & reports
 │   ├── dashboard_data.json
 │   ├── hotspot_map.html
@@ -109,13 +108,15 @@ parkpulse/
 ├── scripts/                 # Python data processing & ML pipeline
 │   ├── 01_clean_data.py
 │   ├── 02_hotspot_clustering.py
+│   ├── 02b_geo_enrichment.py
 │   ├── 03_enforcement_priority.py
 │   ├── 04_time_forecasting.py
-│   ├── 05_event_fusion.py
-│   ├── 05b_decision_engine.py
-│   └── 06_generate_dashboard_data.py
-├── requirements.txt         # Python dependencies
-└── README.md                # This file
+│   ├── 05_decision_engine.py
+│   ├── 06_enforcement_mode.py
+│   ├── 07_generate_dashboard_data.py
+│   └── requirements.txt     # Python dependencies
+├── README.md                # This file
+└── vercel.json              # Vercel configuration
 ```
 
 ---
@@ -133,8 +134,8 @@ FKID000001,12.9054633,77.7007781,"Sarjapura Main Road...",FKN00GL0001,CAR,"[""NO
 
 ## 🧠 Methodology & Assumptions
 
-1. **Congestion Impact Index (CII):** `(Violation Density * 0.35) + (Junction Type Multiplier * 0.25) + (Peak Hour Concentration * 0.25) + (Vehicle Severity Weight * 0.15)`
-2. **Enforcement Priority Index (EPI):** `(Violation Density * 0.40) + (CII * 0.30) + (Event Risk * 0.20) + (Forecasted Violations * 0.10)`
+1. **Congestion Impact Index (CII):** `(Violation Density * 0.25) + (Junction Type * 0.15) + (Peak Hour * 0.15) + (Vehicle Severity * 0.10) + (Road Capacity * 0.20) + (Choke Proximity * 0.15)`
+2. **Enforcement Priority Index (EPI):** `(Violation Density * 0.50) + (CII * 0.35) + (Forecasted Violations * 0.15)`
 3. **Enforcement ROI Simulation (Relief %):** Removing illegal parking has logarithmic diminishing returns.
 4. **Before/After Speed Simulation:** Modeled using a standard square-root congestion heuristic calibrated to violation density.
 
@@ -155,7 +156,7 @@ FKID000001,12.9054633,77.7007781,"Sarjapura Main Road...",FKN00GL0001,CAR,"[""NO
 
 **1. Install Dependencies**
 ```bash
-pip install -r requirements.txt
+pip install -r scripts/requirements.txt
 ```
 
 **2. Ensure Data Exists**
@@ -166,11 +167,12 @@ Execute the scripts in sequential order to generate all the outputs and metrics:
 ```bash
 python scripts/01_clean_data.py
 python scripts/02_hotspot_clustering.py
+python scripts/02b_geo_enrichment.py
 python scripts/03_enforcement_priority.py
 python scripts/04_time_forecasting.py
-python scripts/05_event_fusion.py
-python scripts/05b_decision_engine.py
-python scripts/06_generate_dashboard_data.py
+python scripts/05_decision_engine.py
+python scripts/06_enforcement_mode.py
+python scripts/07_generate_dashboard_data.py
 ```
 
 **4. View Dashboard**
