@@ -1,0 +1,1187 @@
+{
+  "12.9812_77.6085": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 29.02973109062996
+  },
+  "12.9766_77.5766": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.975_77.579": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 99.77151593671721
+  },
+  "12.9978_77.5957": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9645_77.5773": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9395_77.6943": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 14.471737946906536
+  },
+  "12.979_77.5787": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 62.82956455189314
+  },
+  "12.9834_77.6034": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 97.37272426337933
+  },
+  "12.9742_77.5453": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9793_77.5744": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 45.30627517436019
+  },
+  "12.9989_77.5495": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 66.40651192061156
+  },
+  "12.9929_77.5882": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 24.738478656888734
+  },
+  "12.977_77.5748": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 71.79720245492403
+  },
+  "12.9644_77.5831": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 70.30259391838146
+  },
+  "12.9652_77.5379": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.0003_77.5706": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 53.17270597366072
+  },
+  "13.0078_77.5546": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 48.32280345617322
+  },
+  "12.9735_77.5812": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 42.77475015848328
+  },
+  "12.9667_77.5744": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 83.99946947902254
+  },
+  "12.9735_77.5509": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 99.95706869236605
+  },
+  "12.9812_77.5984": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 58.79510737920435
+  },
+  "12.9713_77.5755": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 11.632713543891324
+  },
+  "12.944_77.5714": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 47.904795121613894
+  },
+  "12.9019_77.6363": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.0025_77.5501": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.0089_77.5492": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9969_77.6747": {
+    "road_class": "arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 67.85028893213764
+  },
+  "13.0633_77.5879": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 95.71630537559372
+  },
+  "12.9994_77.5507": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9769_77.5708": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 54.33305940592028
+  },
+  "12.9596_77.5767": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 99.6793767496765
+  },
+  "12.9715_77.597": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 56.52678845741151
+  },
+  "12.9985_77.5531": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 83.54774926009175
+  },
+  "12.9689_77.5367": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 85.43597171786772
+  },
+  "13.1853_77.6806": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 54.03805228368023
+  },
+  "13.0075_77.6921": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 85.66522531568765
+  },
+  "12.9937_77.5538": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9358_77.6154": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9526_77.5412": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9824_77.5599": {
+    "road_class": "local",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 65.74672579971619
+  },
+  "12.9746_77.5474": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 76.48494942346674
+  },
+  "12.9617_77.5995": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 20.539803094354976
+  },
+  "12.9975_77.547": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9863_77.579": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 17.1905723546297
+  },
+  "12.9758_77.5616": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 25.70694563253721
+  },
+  "12.9852_77.5539": {
+    "road_class": "arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 33.24060200927994
+  },
+  "12.9638_77.6422": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 78.02204712506577
+  },
+  "12.9538_77.5433": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9986_77.5414": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9281_77.5807": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9566_77.586": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 43.92023776331232
+  },
+  "12.9725_77.5381": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9583_77.5776": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9743_77.5519": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9878_77.5375": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.962_77.5963": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9147_77.6083": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9799_77.5549": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 61.0915073566389
+  },
+  "12.9772_77.5456": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9903_77.5536": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9592_77.6503": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 67.01950428225206
+  },
+  "12.9236_77.6194": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9691_77.6003": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 47.983471487477075
+  },
+  "12.9585_77.5154": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 28.953665167290023
+  },
+  "12.9785_77.5427": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 28.740254677666634
+  },
+  "12.9905_77.5512": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 74.50381994567843
+  },
+  "12.9312_77.5846": {
+    "road_class": "arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 77.56081342343205
+  },
+  "12.9628_77.5984": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 99.26107337928458
+  },
+  "12.9343_77.6084": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 62.55222815471626
+  },
+  "12.9261_77.5857": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 43.825497536858855
+  },
+  "12.9871_77.5552": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 37.73299235964019
+  },
+  "12.9173_77.5737": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 56.62874966952295
+  },
+  "12.8419_77.646": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 59.4562912909156
+  },
+  "12.9834_77.5486": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 91.51171127455761
+  },
+  "12.9459_77.5704": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 50.90429830144728
+  },
+  "12.9875_77.5497": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9651_77.5483": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9926_77.5579": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9681_77.5887": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.932_77.6129": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9289_77.5826": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 88.27124221167237
+  },
+  "13.1912_77.6462": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 87.76907916591541
+  },
+  "12.9904_77.5886": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9331_77.628": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9695_77.5752": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9283_77.5858": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9393_77.5822": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 65.85423971871666
+  },
+  "12.9884_77.5918": {
+    "road_class": "collector",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 31.43285679733282
+  },
+  "12.9774_77.5905": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 70.40964468994822
+  },
+  "13.0453_77.5084": {
+    "road_class": "collector",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 77.63656201212575
+  },
+  "12.935_77.5846": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 16.04804359438951
+  },
+  "12.9367_77.6027": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.981_77.5879": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.0965_77.5985": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 77.32869105354119
+  },
+  "12.9605_77.5872": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9581_77.5813": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9115_77.5861": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 40.54515089588708
+  },
+  "12.9122_77.5733": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 81.66013432174483
+  },
+  "12.9268_77.5508": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9605_77.53": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 14.96157018391337
+  },
+  "12.9689_77.5862": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9758_77.5587": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 18.092408692124415
+  },
+  "12.9287_77.6077": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9457_77.5957": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 67.89296062787334
+  },
+  "12.9765_77.5852": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 45.00326057607397
+  },
+  "12.9798_77.5925": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 65.39344988910048
+  },
+  "12.9407_77.5725": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 91.60581993901845
+  },
+  "13.1213_77.6225": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 93.4599726261284
+  },
+  "12.9688_77.5453": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 43.49786082616683
+  },
+  "12.9797_77.6948": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 30.929037242698843
+  },
+  "12.9553_77.5929": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9612_77.6363": {
+    "road_class": "arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 97.98990095232843
+  },
+  "12.9485_77.58": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 24.465255853328593
+  },
+  "12.9173_77.5782": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.955_77.5804": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 36.438812242746806
+  },
+  "12.9083_77.6008": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 98.60914413119355
+  },
+  "12.9452_77.5282": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 48.22704956140429
+  },
+  "12.9164_77.5853": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 94.24218972272428
+  },
+  "12.9361_77.519": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9659_77.5854": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 20.4074467667996
+  },
+  "12.9823_77.5987": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 92.73430526644603
+  },
+  "12.954_77.5843": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.951_77.6067": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 21.948080449080322
+  },
+  "12.9176_77.5731": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9477_77.5916": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 72.54459491130672
+  },
+  "12.9137_77.6054": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 73.5318606842788
+  },
+  "12.9626_77.5581": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9414_77.5668": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 66.53862608323547
+  },
+  "12.9393_77.5854": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.0343_77.6251": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 70.67053154437045
+  },
+  "12.8908_77.5649": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 46.34756688083675
+  },
+  "12.9607_77.6385": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 81.14203934985967
+  },
+  "12.9297_77.5806": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9113_77.578": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 44.653872802324855
+  },
+  "12.9662_77.5694": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 89.69914831554937
+  },
+  "12.9847_77.5946": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.954_77.5913": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9649_77.5848": {
+    "road_class": "arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 80.42957715208165
+  },
+  "12.9047_77.5866": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 33.91082088911733
+  },
+  "12.952_77.5904": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 44.81915126586178
+  },
+  "12.9571_77.5743": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 98.47512003030934
+  },
+  "12.9876_77.5595": {
+    "road_class": "arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 21.735951424700524
+  },
+  "12.9381_77.5769": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9353_77.5362": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 81.8324560854854
+  },
+  "12.9179_77.6516": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9895_77.5026": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 96.89316917928832
+  },
+  "12.9059_77.5931": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.992_77.5385": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 10.371685808590719
+  },
+  "12.9225_77.581": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9076_77.5465": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 73.05006817938403
+  },
+  "12.9497_77.5769": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 15.413094541841197
+  },
+  "12.9055_77.6996": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 52.13017210552973
+  },
+  "12.9873_77.7344": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 15.434485810427944
+  },
+  "12.9612_77.5846": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 73.51280218379387
+  },
+  "12.9064_77.5732": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 14.459946904665824
+  },
+  "13.0489_77.5512": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 76.43838372808992
+  },
+  "12.8745_77.5419": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 98.49522494704644
+  },
+  "12.92_77.5829": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9171_77.597": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.917_77.5949": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.987_77.598": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 70.51100137443444
+  },
+  "12.9861_77.5223": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 11.042088907614692
+  },
+  "12.9742_77.5097": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 68.41039089807063
+  },
+  "12.8211_77.6872": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 83.77629814810021
+  },
+  "12.9608_77.5634": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 44.96175064865237
+  },
+  "12.964_77.7479": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9626_77.5898": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 68.85296016625898
+  },
+  "12.9841_77.5817": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.981_77.5945": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 68.9937055498001
+  },
+  "12.9596_77.5553": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9559_77.5463": {
+    "road_class": "arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 13.784690594186117
+  },
+  "12.9673_77.5942": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9449_77.5805": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.022_77.639": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.0987_77.5747": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.8395_77.6773": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 58.037486352992204
+  },
+  "13.0505_77.5255": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 20.848862993211036
+  },
+  "12.9522_77.5758": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9576_77.5694": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.0458_77.7503": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.0075_77.7584": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 28.4607431814022
+  },
+  "12.8756_77.5954": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 14.732611735140349
+  },
+  "12.9609_77.5277": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 77.82330273657621
+  },
+  "13.0142_77.4919": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 47.6953815248063
+  },
+  "12.9598_77.7327": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9848_77.5883": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9274_77.6167": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 36.00577877680068
+  },
+  "12.9454_77.6027": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 95.8539512965548
+  },
+  "12.969_77.6145": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 36.512610054104215
+  },
+  "13.0573_77.547": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 54.16801110894202
+  },
+  "12.9391_77.493": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 40.89249646392566
+  },
+  "12.8938_77.5986": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 15.473624145386786
+  },
+  "13.0701_77.6318": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.0995_77.5882": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.0035_77.7235": {
+    "road_class": "arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 94.75852824130776
+  },
+  "12.9373_77.5824": {
+    "road_class": "local",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 55.268558073366826
+  },
+  "12.9622_77.6153": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 95.56344158850939
+  },
+  "12.9669_77.5871": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 48.47641902864883
+  },
+  "12.9915_77.5582": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9785_77.5381": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.0159_77.5844": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 79.15779907676873
+  },
+  "12.9237_77.5744": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9277_77.5983": {
+    "road_class": "local",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 61.502401405746404
+  },
+  "12.9207_77.6001": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 49.25271672108122
+  },
+  "12.9581_77.5525": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 42.39653536896279
+  },
+  "12.8547_77.6637": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 88.453521882708
+  },
+  "13.0072_77.58": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 85.92720233224266
+  },
+  "12.8702_77.6553": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9987_77.5825": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 64.13392496119305
+  },
+  "12.9384_77.5926": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.0838_77.637": {
+    "road_class": "collector",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 76.41585975979335
+  },
+  "12.8509_77.6575": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 66.28894647664919
+  },
+  "12.913_77.4819": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9788_77.5816": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 30.80397095529173
+  },
+  "12.8966_77.7201": {
+    "road_class": "local",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9927_77.7166": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9171_77.5002": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 44.852680964049284
+  },
+  "12.9065_77.5775": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 57.63315917383063
+  },
+  "12.922_77.5608": {
+    "road_class": "collector",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 78.17638676874186
+  },
+  "12.9421_77.6084": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9064_77.5814": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9597_77.5713": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.8961_77.6579": {
+    "road_class": "local",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 64.08991259072039
+  },
+  "12.9418_77.7472": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "13.1456_77.6182": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.948_77.5344": {
+    "road_class": "arterial",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9001_77.5859": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 25.839628292372858
+  },
+  "13.0033_77.6624": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.9311_77.5926": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 78.9358454433211
+  },
+  "13.0349_77.7343": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 76.90554855317627
+  },
+  "13.1084_77.6034": {
+    "road_class": "local",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 20.971428344220456
+  },
+  "13.0261_77.7203": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 55.70407916639075
+  },
+  "12.862_77.5299": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "metro_station",
+    "poi_distance_m": 47.32326729755183
+  },
+  "12.9995_77.4888": {
+    "road_class": "sub_arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 28.49000205977356
+  },
+  "13.0598_77.6488": {
+    "road_class": "collector",
+    "nearby_poi_type": "none",
+    "poi_distance_m": 500
+  },
+  "12.926_77.6196": {
+    "road_class": "arterial",
+    "nearby_poi_type": "signalized_intersection",
+    "poi_distance_m": 23.438194489768836
+  },
+  "12.9863_77.4779": {
+    "road_class": "arterial",
+    "nearby_poi_type": "commercial_complex",
+    "poi_distance_m": 40.70458204545561
+  }
+}

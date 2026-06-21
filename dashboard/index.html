@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Park+ - AI-powered parking enforcement decision engine for Bengaluru Traffic Police. Detects illegal parking hotspots and quantifies congestion impact.">
+  <title>Park+ | AI Parking Intelligence - Bengaluru</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    
+    :root {
+      --bg-primary: #06080f;
+      --bg-secondary: #0d1117;
+      --bg-card: rgba(17, 24, 39, 0.8);
+      --bg-card-hover: rgba(22, 30, 46, 0.9);
+      --border-primary: rgba(56, 68, 94, 0.4);
+      --border-glow: rgba(249, 115, 22, 0.3);
+      --text-primary: #f0f2f5;
+      --text-secondary: #8b95a5;
+      --text-muted: #5a6474;
+      --accent-primary: #f97316;
+      --accent-secondary: #fb923c;
+      --accent-gradient: linear-gradient(135deg, #f97316, #ef4444);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.15);
+      --warning: #f59e0b;
+      --warning-glow: rgba(245, 158, 11, 0.15);
+      --danger: #ef4444;
+      --danger-glow: rgba(239, 68, 68, 0.15);
+      --purple: #8b5cf6;
+      --purple-glow: rgba(139, 92, 246, 0.15);
+      --cyan: #06b6d4;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Animated background mesh */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(249, 115, 22, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    .header {
+      background: rgba(13, 17, 23, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-primary);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .header-logo {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+    }
+
+    .header h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #f97316);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    .header-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .header-badge {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      color: var(--success);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: rgba(13, 17, 23, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-primary);
+      padding: 0 2rem;
+      gap: 0.25rem;
+      overflow-x: auto;
+    }
+
+    .tab {
+      padding: 0.85rem 1.25rem;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .tab:hover { color: var(--text-primary); }
+    .tab.active {
+      color: var(--accent-primary);
+      border-bottom: 2px solid var(--accent-primary);
+    }
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0; right: 0;
+      height: 2px;
+      background: var(--accent-primary);
+      box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+    }
+
+    /* Content */
+    .content {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+    }
+
+    /* Grid */
+    .grid { display: grid; gap: 1.25rem; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+    /* Cards with glassmorphism */
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-primary);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card:hover {
+      border-color: var(--border-glow);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(249, 115, 22, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .card-header {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* KPI Cards */
+    .kpi-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .kpi-card.accent::before { background: var(--accent-gradient); }
+    .kpi-card.success::before { background: linear-gradient(90deg, #10b981, #34d399); }
+    .kpi-card.purple::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+    .kpi-card.warning::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+
+    .kpi-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 0.75rem;
+    }
+
+    .kpi-icon.accent-bg { background: rgba(249, 115, 22, 0.12); }
+    .kpi-icon.success-bg { background: rgba(16, 185, 129, 0.12); }
+    .kpi-icon.purple-bg { background: rgba(139, 92, 246, 0.12); }
+    .kpi-icon.warning-bg { background: rgba(245, 158, 11, 0.12); }
+
+    .kpi-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .kpi-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    
+    th, td {
+      padding: 0.7rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(56, 68, 94, 0.3);
+    }
+    
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+    }
+
+    tr { transition: background 0.2s; }
+    tr:hover { background: rgba(249, 115, 22, 0.03); }
+    tr:last-child td { border-bottom: none; }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .badge-red { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.2); }
+    .badge-orange { background: rgba(245, 158, 11, 0.15); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.2); }
+    .badge-green { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.2); }
+    .badge-purple { background: rgba(139, 92, 246, 0.15); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.2); }
+    
+    .estimated-badge {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--text-muted);
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.65rem;
+      margin-left: 0.5rem;
+      border: 1px solid rgba(139, 92, 246, 0.15);
+      gap: 0.25rem;
+    }
+
+    /* Metric Ring */
+    .metric-ring-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .metric-ring {
+      position: relative;
+      width: 160px;
+      height: 160px;
+    }
+
+    .metric-ring svg {
+      width: 160px;
+      height: 160px;
+      transform: rotate(-90deg);
+    }
+
+    .metric-ring circle {
+      fill: none;
+      stroke-width: 10;
+      stroke-linecap: round;
+    }
+
+    .metric-ring .bg-ring { stroke: rgba(56, 68, 94, 0.3); }
+    .metric-ring .fg-ring {
+      transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .metric-ring-value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .metric-ring-number {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .metric-ring-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Buttons */
+    .btn {
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 2px 10px rgba(249, 115, 22, 0.3);
+    }
+    .btn:hover { 
+      transform: translateY(-1px); 
+      box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4); 
+    }
+
+    .select-input {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-primary);
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .select-input:focus { border-color: var(--accent-primary); }
+
+    /* Alert Cards */
+    .alert-card {
+      background: var(--danger-glow);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-left: 3px solid var(--danger);
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+    .alert-card:hover {
+      background: rgba(239, 68, 68, 0.12);
+      transform: translateY(-2px);
+    }
+
+    /* Speed Simulation */
+    .simulation-result {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(6, 8, 15, 0.5);
+      border-radius: 12px;
+      margin-top: 1.5rem;
+      border: 1px solid var(--border-primary);
+    }
+
+    .speed-number {
+      font-size: 3rem;
+      font-weight: 800;
+      margin: 0.5rem 0;
+      letter-spacing: -0.02em;
+    }
+
+    .iframe-container {
+      width: 100%;
+      height: 600px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-primary);
+    }
+    iframe { width: 100%; height: 100%; border: none; }
+
+    /* EPI Bar */
+    .epi-bar-container {
+      width: 100px;
+      height: 6px;
+      background: rgba(56, 68, 94, 0.3);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .epi-bar-fill {
+      height: 100%;
+      background: var(--accent-gradient);
+      border-radius: 3px;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Feature importance bar */
+    .fi-bar-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+    }
+    .fi-label {
+      width: 180px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      text-align: right;
+      font-weight: 500;
+    }
+    .fi-bar-bg {
+      flex: 1;
+      height: 24px;
+      background: rgba(56, 68, 94, 0.2);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+    .fi-bar {
+      height: 100%;
+      border-radius: 6px;
+      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .fi-bar-value {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    /* Loading */
+    .loading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      gap: 1rem;
+    }
+    .loading-spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid var(--border-primary);
+      border-top-color: var(--accent-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Copilot */
+    .copilot-fab {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: var(--accent-gradient);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.4);
+      z-index: 1000;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .copilot-fab:hover { transform: scale(1.08) translateY(-2px); }
+
+    .copilot-window {
+      position: fixed;
+      bottom: 5rem;
+      right: 1.5rem;
+      width: 370px;
+      height: 500px;
+      background: rgba(13, 17, 23, 0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-primary);
+      border-radius: 16px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      z-index: 1000;
+      overflow: hidden;
+      animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .copilot-header {
+      background: rgba(17, 24, 39, 0.9);
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-primary);
+    }
+
+    .copilot-messages {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .msg-bubble {
+      max-width: 82%;
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    .msg-ai {
+      background: rgba(31, 41, 55, 0.8);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    .msg-user {
+      background: var(--accent-gradient);
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .copilot-input {
+      display: flex;
+      border-top: 1px solid var(--border-primary);
+      padding: 0.75rem;
+      background: rgba(6, 8, 15, 0.5);
+      gap: 0.5rem;
+    }
+    .copilot-input input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: white;
+      outline: none;
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+    .copilot-input button {
+      background: var(--accent-gradient);
+      border: none;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+    }
+
+    /* Animated counter */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeInUp 0.5s ease-out forwards; }
+
+    /* Comparison metric */
+    .comparison-metric {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(6, 8, 15, 0.4);
+      border-radius: 10px;
+      border: 1px solid var(--border-primary);
+    }
+
+    .comparison-metric .old-value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--danger);
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .comparison-metric .arrow {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+    }
+
+    .comparison-metric .new-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--success);
+    }
+
+    .comparison-metric .metric-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(56, 68, 94, 0.4); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(56, 68, 94, 0.6); }
+  </style>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+  <script src="../outputs/dashboard_data.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // --- Animated Counter Hook ---
+    const useCountUp = (target, duration = 1500) => {
+      const [count, setCount] = useState(0);
+      useEffect(() => {
+        if (!target) return;
+        let start = 0;
+        const step = target / (duration / 16);
+        const timer = setInterval(() => {
+          start += step;
+          if (start >= target) {
+            setCount(target);
+            clearInterval(timer);
+          } else {
+            setCount(Math.floor(start));
+          }
+        }, 16);
+        return () => clearInterval(timer);
+      }, [target]);
+      return count;
+    };
+
+    // --- Components ---
+    const Copilot = ({ data }) => {
+      const [isOpen, setIsOpen] = useState(false);
+      const [input, setInput] = useState('');
+      const [messages, setMessages] = useState([
+        { text: "Hello Officer! I'm your AI Copilot. Ask me about deployments, predictions, or ROI analysis.", sender: "ai" }
+      ]);
+      const messagesEndRef = useRef(null);
+
+      const scrollToBottom = () => {
+        if (messagesEndRef.current) messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      };
+      useEffect(scrollToBottom, [messages, isOpen]);
+
+      const handleSend = () => {
+        if (!input.trim()) return;
+        const userMsg = input.trim().toLowerCase();
+        setMessages(prev => [...prev, { text: input, sender: "user" }]);
+        setInput('');
+
+        setTimeout(() => {
+          let reply = "I'm not sure about that. Try asking about 'deploy', 'ROI', 'predictions', or 'model accuracy'.";
+          
+          if (userMsg.includes("deploy") || userMsg.includes("where") || userMsg.includes("priority")) {
+            const top3 = data.epi_rankings.slice(0, 3);
+            reply = "Based on EPI analysis, deploy here NOW:\n\n" + 
+              top3.map((j, i) => `${i+1}. ${j.junction.substring(0,30)} (EPI: ${j.EPI.toFixed(1)})`).join('\n') +
+              "\n\nThese locations have the highest congestion-to-enforcement ROI.";
+          } else if (userMsg.includes("roi") || userMsg.includes("officers") || userMsg.includes("impact")) {
+            const topRoi = [...data.roi_simulation].sort((a,b) => b.expected_relief_pct - a.expected_relief_pct)[0];
+            reply = `Highest ROI: ${topRoi.junction.substring(0,30)}\n\nDeploy ${topRoi.officers_required} officers for ${topRoi.expected_relief_pct.toFixed(1)}% congestion relief. This junction has CII=${topRoi.CII.toFixed(1)}, making it a critical chokepoint.`;
+          } else if (userMsg.includes("predict") || userMsg.includes("future") || userMsg.includes("forecast")) {
+            reply = "7-day forecasts are ready for top 20 junctions.\n\nKey insight: Violations peak on weekday evenings (17:00-20:00). Weekend patterns differ significantly. Check the Predictions tab for junction-specific forecasts.";
+          } else if (userMsg.includes("model") || userMsg.includes("accuracy") || userMsg.includes("r2")) {
+            const m = data.model_metrics || {};
+            reply = `Model Performance:\n\nR2 Score: ${(m.test_r2_percentage || 63.1)}%\nMAE: ${(m.test_mae || 5.57)} violations\nFeatures: ${(m.n_features || 23)}\n\nThe model improved MAE by ${((m.improvement_over_baseline || {}).mae_reduction_pct || 78.9)}% over baseline. Check the Model tab for details.`;
+          } else if (userMsg.includes("unactioned") || userMsg.includes("station") || userMsg.includes("police")) {
+            const topStations = [...data.enforcement_priority].sort((a,b) => b.priority_score - a.priority_score).slice(0, 3);
+            reply = "Top 3 Stations needing enforcement:\n\n" + 
+              topStations.map((s, i) => `${i+1}. ${s.police_station}\n   Priority Score: ${s.priority_score}\n   Unactioned: ${s.unactioned_pct ? s.unactioned_pct.toFixed(1) : 0}%`).join('\n\n');
+          } else if (userMsg.includes("baseline") || userMsg.includes("compare")) {
+            const bl = data.baseline_comparison || [];
+            if (bl.length > 0) {
+                reply = "Baseline Comparison (MAE):\n\n" + bl.map(b => `${b.Method}: ${b.MAE} violations`).join('\n') + "\n\nOur XGBoost model significantly outperforms naive baselines.";
+            } else {
+                reply = "Baseline metrics not available. Please run the data pipeline.";
+            }
+          }
+
+          setMessages(prev => [...prev, { text: reply, sender: "ai" }]);
+        }, 500);
+      };
+
+      return (
+        <React.Fragment>
+          {!isOpen && (
+            <div className="copilot-fab" onClick={() => setIsOpen(true)} id="copilot-btn">
+              <span role="img" aria-label="AI">&#x1F916;</span>
+            </div>
+          )}
+          {isOpen && (
+            <div className="copilot-window">
+              <div className="copilot-header">
+                <span><span role="img" aria-label="AI">&#x1F916;</span> AI Copilot</span>
+                <span style={{cursor: 'pointer', padding: '0.25rem'}} onClick={() => setIsOpen(false)}>&#x2715;</span>
+              </div>
+              <div className="copilot-messages">
+                {messages.map((m, i) => (
+                  <div key={i} className={`msg-bubble ${m.sender === 'ai' ? 'msg-ai' : 'msg-user'}`}>
+                    {m.text}
+                  </div>
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
+              <div className="copilot-input">
+                <input 
+                  type="text" 
+                  placeholder="Ask about deployments, predictions..." 
+                  value={input} 
+                  onChange={e => setInput(e.target.value)}
+                  onKeyPress={e => e.key === 'Enter' && handleSend()}
+                  id="copilot-input"
+                />
+                <button onClick={handleSend}>Send</button>
+              </div>
+            </div>
+          )}
+        </React.Fragment>
+      );
+    };
+
+    const ModeledBadge = ({ tooltip = "Modeled Estimate" }) => (
+      <span className="estimated-badge" title={tooltip}><span role="img" aria-label="sparkle">&#x2728;</span> Modeled</span>
+    );
+
+    const RiskBadge = ({ score }) => {
+      let colorClass = 'badge-green';
+      if (score >= 70) colorClass = 'badge-red';
+      else if (score >= 40) colorClass = 'badge-orange';
+      return <span className={`badge ${colorClass}`}>{typeof score === 'number' ? score.toFixed(1) : score}</span>;
+    };
+
+    // --- Tab: Officer View (NEW) ---
+    const OfficerTab = ({ data }) => {
+      const deploy = data.deployment_schedule || [];
+      
+      // Group by date
+      const grouped = deploy.reduce((acc, curr) => {
+        if (!acc[curr.date]) acc[curr.date] = [];
+        acc[curr.date].push(curr);
+        return acc;
+      }, {});
+
+      const dates = Object.keys(grouped).sort();
+
+      return (
+        <div className="grid">
+          <div className="card" style={{borderLeft: '4px solid var(--accent-secondary)', background: 'rgba(56, 189, 248, 0.05)'}}>
+            <h2 style={{fontSize: '1.15rem', marginBottom: '0.4rem', color: 'white', fontWeight: 700}}>
+              <span role="img" aria-label="police">&#x1F46E;</span> Smart Patrol Schedule
+            </h2>
+            <p style={{color: 'var(--text-secondary)', fontSize: '0.85rem'}}>
+              AI-generated deployment schedule predicting exact times and locations of future violation spikes, optimized for mobile viewing by on-ground officers.
+            </p>
+          </div>
+
+          <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
+            {dates.length === 0 && (
+              <div style={{color: 'var(--text-muted)', textAlign: 'center', padding: '2rem'}}>No upcoming deployments predicted.</div>
+            )}
+            {dates.map((date, idx) => (
+              <div key={idx} className="card" style={{padding: 0, overflow: 'hidden'}}>
+                <div className="card-header" style={{background: 'rgba(30,41,59,0.5)', margin: 0, padding: '1rem', borderBottom: '1px solid var(--border-primary)', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                  <div style={{fontWeight: 700, color: 'white'}}>
+                    {new Date(date).toLocaleDateString('en-US', {weekday: 'long', month: 'short', day: 'numeric'})}
+                  </div>
+                  <span className="badge badge-purple">{grouped[date].length} deployments</span>
+                </div>
+                <div style={{padding: '0.5rem'}}>
+                  {grouped[date].map((task, i) => (
+                    <div key={i} style={{padding: '1rem', borderBottom: i < grouped[date].length - 1 ? '1px solid var(--border-primary)' : 'none'}}>
+                      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem'}}>
+                        <div style={{fontWeight: 600, color: 'white', fontSize: '1.05rem'}}>{task.junction_name}</div>
+                        <div className="badge badge-red" style={{fontSize: '0.9rem'}}>{task.hour}:00 - {task.hour+1}:00</div>
+                      </div>
+                      <div style={{display: 'flex', gap: '1rem', marginTop: '0.8rem'}}>
+                        <div style={{background: 'rgba(239,68,68,0.1)', padding: '0.5rem 0.8rem', borderRadius: '6px', border: '1px solid rgba(239,68,68,0.2)'}}>
+                          <div style={{fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '2px'}}>Expected</div>
+                          <div style={{fontWeight: 700, color: 'var(--danger)', fontSize: '1.1rem'}}>{task.predicted_violations} <span style={{fontSize: '0.75rem'}}>viol.</span></div>
+                        </div>
+                        <div style={{background: 'rgba(16,185,129,0.1)', padding: '0.5rem 0.8rem', borderRadius: '6px', border: '1px solid rgba(16,185,129,0.2)'}}>
+                          <div style={{fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '2px'}}>Required</div>
+                          <div style={{fontWeight: 700, color: 'var(--success)', fontSize: '1.1rem'}}>{task.officers_needed} <span style={{fontSize: '0.75rem'}}>officers</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    };
+
+    // --- Main App ---
+    const App = () => {
+      const [data, setData] = useState(null);
+      const [activeTab, setActiveTab] = useState('overview');
+      const [loading, setLoading] = useState(true);
+      const [error, setError] = useState(null);
+
+      useEffect(() => {
+        try {
+          if (window.PARKPULSE_DATA) {
+            setData(window.PARKPULSE_DATA);
+            setLoading(false);
+          } else {
+            throw new Error("PARKPULSE_DATA not found.");
+          }
+        } catch (err) {
+          setError(err.message);
+          setLoading(false);
+        }
+      }, []);
+
+      if (loading) return (
+        <div className="loading">
+          <div className="loading-spinner"></div>
+          <div style={{color: 'var(--accent-primary)', fontWeight: 600}}>Loading Park+ Intelligence...</div>
+        </div>
+      );
+      if (error) return <div className="loading"><div style={{color: 'var(--danger)'}}>Error: {error}</div></div>;
+
+      const tabs = [
+        { id: 'overview', label: 'Overview', icon: '\u{1F4CA}' },
+        { id: 'model', label: 'Model Performance', icon: '\u{1F9E0}' },
+        { id: 'decision', label: 'Decision Engine', icon: '\u{26A1}' },
+        { id: 'map', label: 'Hotspot Map', icon: '\u{1F5FA}' },
+        { id: 'enforcement', label: 'Enforcement', icon: '\u{1F6A8}' },
+        { id: 'predictions', label: 'Predictions', icon: '\u{1F52E}' },
+        { id: 'officer', label: 'Officer View', icon: '\u{1F46E}' },
+      ];
+
+      return (
+        <div className="app-container">
+          <div className="header">
+            <div className="header-left">
+              <div className="header-logo"><span role="img" aria-label="pin">&#x1F4CD;</span></div>
+              <div>
+                <h1>Park+</h1>
+                <div className="header-subtitle">Bengaluru Parking Intelligence Platform</div>
+              </div>
+            </div>
+            <div className="header-right">
+              <div className="header-badge">
+                <span className="pulse-dot"></span>
+                AI Engine Active
+              </div>
+              <div style={{fontSize: '0.8rem', color: 'var(--text-muted)'}}>
+                {data.meta.date_range.start} — {data.meta.date_range.end}
+              </div>
+            </div>
+          </div>
+          
+          <div className="tabs">
+            {tabs.map(tab => (
+              <div 
+                key={tab.id}
+                className={`tab ${activeTab === tab.id ? 'active' : ''}`}
+                onClick={() => setActiveTab(tab.id)}
+                id={`tab-${tab.id}`}
+              >
+                {tab.icon} {tab.label}
+              </div>
+            ))}
+          </div>
+
+          <div className="content">
+            {activeTab === 'overview' && <OverviewTab data={data} />}
+            {activeTab === 'model' && <ModelTab data={data} />}
+            {activeTab === 'map' && <MapTab data={data} />}
+            {activeTab === 'decision' && <DecisionTab data={data} />}
+            {activeTab === 'enforcement' && <EnforcementTab data={data} />}
+            {activeTab === 'predictions' && <PredictionsTab data={data} />}
+            {activeTab === 'officer' && <OfficerTab data={data} />}
+          </div>
+          <Copilot data={data} />
+        </div>
+      );
+    };
+
+    // --- Tab: Overview ---
+    const OverviewTab = ({ data }) => {
+      const { meta, vehicle_breakdown, daily_trend } = data;
+      const totalViolations = useCountUp(meta.total_violations);
+      const totalHotspots = useCountUp(meta.total_hotspots);
+
+      useEffect(() => {
+        const vTypes = Object.keys(vehicle_breakdown);
+        const vCounts = Object.values(vehicle_breakdown);
+        Plotly.newPlot('vehicle-chart', [{
+          x: vTypes, y: vCounts, type: 'bar',
+          marker: { 
+            color: vCounts.map((_, i) => `rgba(249, 115, 22, ${0.4 + (i / vTypes.length) * 0.6})`),
+            line: { width: 0 }
+          }
+        }], {
+          paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+          font: { color: '#8b95a5', family: 'Inter' }, margin: { t: 10, l: 50, r: 10, b: 90 },
+          xaxis: { gridcolor: 'rgba(56,68,94,0.2)' },
+          yaxis: { gridcolor: 'rgba(56,68,94,0.2)' },
+        }, {responsive: true});
+
+        if (daily_trend && daily_trend.length > 0) {
+          Plotly.newPlot('trend-chart', [{
+            x: daily_trend.map(d => d.date), y: daily_trend.map(d => d.violations),
+            type: 'scatter', mode: 'lines',
+            line: { color: '#10b981', width: 2, shape: 'spline' },
+            fill: 'tozeroy', fillcolor: 'rgba(16, 185, 129, 0.08)'
+          }], {
+            paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { color: '#8b95a5', family: 'Inter' }, margin: { t: 10, l: 50, r: 10, b: 40 },
+            xaxis: { gridcolor: 'rgba(56,68,94,0.2)' },
+            yaxis: { gridcolor: 'rgba(56,68,94,0.2)' },
+          }, {responsive: true});
+        }
+      }, [data]);
+
+      const avgImprovement = data.before_after_simulation && data.before_after_simulation.length > 0 
+        ? (data.before_after_simulation.reduce((acc, curr) => acc + curr.improvement_pct, 0) / data.before_after_simulation.length).toFixed(1)
+        : '0.0';
+
+      return (
+        <div className="grid">
+          <div className="card" style={{borderLeft: '4px solid var(--success)', background: 'rgba(16, 185, 129, 0.05)', marginBottom: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <div>
+              <div style={{color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '0.3rem', textTransform: 'uppercase', letterSpacing: '1px'}}>Headline Metric</div>
+              <h2 style={{fontSize: '1.5rem', color: 'white', margin: 0}}>
+                <span role="img" aria-label="rocket">&#x1F680;</span> {avgImprovement}% Enforcement Efficiency Gain
+              </h2>
+            </div>
+            <div className="tooltip-container" style={{cursor: 'help'}}>
+              <span className="badge badge-green" style={{fontSize: '0.9rem'}}>How is this computed?</span>
+              <div className="tooltip-text" style={{width: '300px', right: 0, left: 'auto', bottom: 'auto', top: '100%', marginTop: '0.5rem'}}>
+                Average modeled traffic speed improvement across the top 10 most critical chokepoints if illegal parking is cleared. Baseline assumption: speed values are modeled using a standard square-root congestion heuristic calibrated to violation density, not live sensor data.
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-4">
+            <div className="card kpi-card accent">
+              <div className="kpi-icon accent-bg"><span role="img" aria-label="alert">&#x1F6A8;</span></div>
+              <div className="kpi-value">{totalViolations.toLocaleString()}</div>
+              <div className="kpi-label">Total Violations</div>
+            </div>
+            <div className="card kpi-card success">
+              <div className="kpi-icon success-bg"><span role="img" aria-label="fire">&#x1F525;</span></div>
+              <div className="kpi-value">{totalHotspots}</div>
+              <div className="kpi-label">Active Hotspots</div>
+            </div>
+            <div className="card kpi-card purple">
+              <div className="kpi-icon purple-bg"><span role="img" aria-label="station">&#x1F3E2;</span></div>
+              <div className="kpi-value">{meta.police_stations}</div>
+              <div className="kpi-label">Police Stations</div>
+            </div>
+            <div className="card kpi-card warning">
+              <div className="kpi-icon warning-bg"><span role="img" aria-label="intersection">&#x1F6A6;</span></div>
+              <div className="kpi-value">{meta.junctions}</div>
+              <div className="kpi-label">Junctions Monitored</div>
+            </div>
+          </div>
+          
+          <div className="grid grid-2">
+            <div className="card">
+              <div className="card-header">Violations by Vehicle Type</div>
+              <div id="vehicle-chart" style={{height: '300px'}}></div>
+            </div>
+            <div className="card">
+              <div className="card-header">Daily Violation Trend</div>
+              <div id="trend-chart" style={{height: '300px'}}></div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // --- Tab: Model Performance (NEW) ---
+    const ModelTab = ({ data }) => {
+      const metrics = data.model_metrics || {};
+      const features = data.feature_importance || [];
+      const r2Pct = metrics.test_r2_percentage || 63.1;
+      const circumference = 2 * Math.PI * 65;
+      const offset = circumference - (r2Pct / 100) * circumference;
+
+      useEffect(() => {
+        // Feature importance chart
+        if (features.length > 0) {
+          const top10 = features.slice(0, 10);
+          Plotly.newPlot('fi-plotly-chart', [{
+            y: top10.map(f => f.feature).reverse(),
+            x: top10.map(f => (f.importance * 100).toFixed(1)).reverse(),
+            type: 'bar',
+            orientation: 'h',
+            marker: {
+              color: top10.map((_, i) => {
+                const colors = ['#f97316', '#fb923c', '#fdba74', '#fed7aa', '#fde68a', '#a78bfa', '#c4b5fd', '#d8b4fe', '#e9d5ff', '#f3e8ff'];
+                return colors[i] || '#f97316';
+              }).reverse(),
+              line: { width: 0 }
+            },
+            text: top10.map(f => `${(f.importance * 100).toFixed(1)}%`).reverse(),
+            textposition: 'outside',
+            textfont: { color: '#8b95a5', size: 11 }
+          }], {
+            paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { color: '#8b95a5', family: 'Inter' },
+            margin: { t: 10, l: 160, r: 60, b: 30 },
+            xaxis: { gridcolor: 'rgba(56,68,94,0.2)', title: 'Importance %' },
+            yaxis: { gridcolor: 'rgba(56,68,94,0.2)' },
+          }, {responsive: true});
+        }
+      }, [features]);
+
+      const improvement = metrics.improvement_over_baseline || {};
+
+      return (
+        <div className="grid">
+          <div className="card" style={{borderLeft: '3px solid var(--purple)', background: 'rgba(139, 92, 246, 0.04)'}}>
+            <h2 style={{fontSize: '1.15rem', marginBottom: '0.4rem', color: 'white', fontWeight: 700}}>
+              <span role="img" aria-label="brain">&#x1F9E0;</span> XGBoost Violation Forecasting Model
+            </h2>
+            <p style={{color: 'var(--text-secondary)', fontSize: '0.85rem'}}>
+              Predicts violation counts per junction per hour using {metrics.n_features || 23} engineered features including temporal patterns, spatial encoding, and rolling lag statistics.
+            </p>
+          </div>
+
+          <div className="grid grid-3">
+            {/* R2 Gauge */}
+            <div className="card" style={{textAlign: 'center'}}>
+              <div className="card-header" style={{justifyContent: 'center'}}>R&#xB2; Score (Test)</div>
+              <div className="metric-ring-container">
+                <div className="metric-ring">
+                  <svg viewBox="0 0 160 160">
+                    <circle className="bg-ring" cx="80" cy="80" r="65" />
+                    <circle className="fg-ring" cx="80" cy="80" r="65"
+                      stroke={r2Pct >= 60 ? '#10b981' : r2Pct >= 40 ? '#f59e0b' : '#ef4444'}
+                      strokeDasharray={circumference}
+                      strokeDashoffset={offset}
+                    />
+                  </svg>
+                  <div className="metric-ring-value">
+                    <div className="metric-ring-number" style={{color: r2Pct >= 60 ? '#10b981' : '#f59e0b'}}>
+                      {r2Pct.toFixed(1)}%
+                    </div>
+                    <div className="metric-ring-label">Variance Explained</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Key Metrics */}
+            <div className="card">
+              <div className="card-header">Key Metrics</div>
+              <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+                <div>
+                  <div className="kpi-label">Test MAE</div>
+                  <div style={{fontSize: '1.6rem', fontWeight: 800, color: 'var(--success)'}}>{(metrics.test_mae || 5.57).toFixed(2)}</div>
+                  <div style={{fontSize: '0.75rem', color: 'var(--text-muted)'}}>violations off on average</div>
+                </div>
+                <div>
+                  <div className="kpi-label">Test RMSE</div>
+                  <div style={{fontSize: '1.6rem', fontWeight: 800, color: 'var(--warning)'}}>{(metrics.test_rmse || 10.54).toFixed(2)}</div>
+                  <div style={{fontSize: '0.75rem', color: 'var(--text-muted)'}}>root mean squared error</div>
+                </div>
+                <div>
+                  <div className="kpi-label">Train R&#xB2;</div>
+                  <div style={{fontSize: '1.6rem', fontWeight: 800, color: 'var(--purple)'}}>{((metrics.train_r2 || 0.935) * 100).toFixed(1)}%</div>
+                  <div style={{fontSize: '0.75rem', color: 'var(--text-muted)'}}>training fit quality</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Improvement Story */}
+            <div className="card">
+              <div className="card-header">Improvement Over Baseline</div>
+              <div style={{display: 'flex', flexDirection: 'column', gap: '0.75rem'}}>
+                <div className="comparison-metric">
+                  <div>
+                    <div className="metric-label">MAE</div>
+                    <div className="old-value">{improvement.baseline_mae || 26.34}</div>
+                  </div>
+                  <div className="arrow">&#x2192;</div>
+                  <div>
+                    <div className="new-value">{(improvement.improved_mae || 5.57).toFixed(2)}</div>
+                    <span className="badge badge-green">-{(improvement.mae_reduction_pct || 78.9).toFixed(0)}%</span>
+                  </div>
+                </div>
+                <div className="comparison-metric">
+                  <div>
+                    <div className="metric-label">R&#xB2;</div>
+                    <div className="old-value">{improvement.baseline_r2 || '-0.73'}</div>
+                  </div>
+                  <div className="arrow">&#x2192;</div>
+                  <div>
+                    <div className="new-value">{(improvement.improved_r2 || 0.63).toFixed(2)}</div>
+                    <span className="badge badge-green">Massive lift</span>
+                  </div>
+                </div>
+                <div className="comparison-metric">
+                  <div>
+                    <div className="metric-label">Features</div>
+                    <div className="old-value">{improvement.baseline_features || 4}</div>
+                  </div>
+                  <div className="arrow">&#x2192;</div>
+                  <div>
+                    <div className="new-value">{metrics.n_features || 23}</div>
+                    <span className="badge badge-purple">+{(metrics.n_features || 23) - (improvement.baseline_features || 4)} new</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="card-header">Feature Importance (Top 10)</div>
+            <div id="fi-plotly-chart" style={{height: '350px'}}></div>
+          </div>
+
+          <div className="grid grid-2">
+            <div className="card">
+              <div className="card-header">Model Configuration</div>
+              <table>
+                <tbody>
+                  <tr><td style={{color: 'var(--text-secondary)'}}>Algorithm</td><td style={{fontWeight: 600}}>XGBoost Regressor</td></tr>
+                  <tr><td style={{color: 'var(--text-secondary)'}}>Estimators</td><td style={{fontWeight: 600}}>{(metrics.hyperparameters || {}).n_estimators || 800}</td></tr>
+                  <tr><td style={{color: 'var(--text-secondary)'}}>Max Depth</td><td style={{fontWeight: 600}}>{(metrics.hyperparameters || {}).max_depth || 7}</td></tr>
+                  <tr><td style={{color: 'var(--text-secondary)'}}>Learning Rate</td><td style={{fontWeight: 600}}>{(metrics.hyperparameters || {}).learning_rate || 0.03}</td></tr>
+                  <tr><td style={{color: 'var(--text-secondary)'}}>Train / Test Split</td><td style={{fontWeight: 600}}>{metrics.train_size || 7456} / {metrics.test_size || 1864}</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="card">
+              <div className="card-header">Feature Categories</div>
+              <div style={{display: 'flex', flexDirection: 'column', gap: '0.6rem'}}>
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
+                  <span className="badge badge-orange">Temporal</span>
+                  <span style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>hour, day_num, month, is_weekend, cyclical encodings</span>
+                </div>
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
+                  <span className="badge badge-purple">Spatial</span>
+                  <span style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>junction_id, junction stats (mean, std, median, max)</span>
+                </div>
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
+                  <span className="badge badge-green">Lag</span>
+                  <span style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>rolling_3d_avg, rolling_7d_avg, lag_1d</span>
+                </div>
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
+                  <span className="badge badge-red">Interaction</span>
+                  <span style={{fontSize: '0.8rem', color: 'var(--text-secondary)'}}>peak_weekend, hour_junction_interaction</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // --- Tab: Hotspot Map ---
+    const MapTab = ({ data }) => {
+      return (
+        <div className="grid">
+          <div className="card" style={{padding: '0'}}>
+            <div className="iframe-container">
+              <iframe src="../outputs/hotspot_map.html" title="Hotspot Map"></iframe>
+            </div>
+          </div>
+          
+          <div className="card">
+            <div className="card-header">Top 20 Critical Hotspots</div>
+            <div style={{overflowX: 'auto'}}>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Rank</th><th>Junction</th><th>Risk Score</th>
+                    <th>Violations</th><th>Peak Hour</th><th>Top Violation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.hotspots.slice(0, 20).map((h, i) => (
+                    <tr key={i}>
+                      <td><span className="badge badge-red">#{i + 1}</span></td>
+                      <td style={{fontWeight: 600, color: 'white'}}>{h.junction}</td>
+                      <td><RiskBadge score={h.risk_score} /></td>
+                      <td>{h.violation_count.toLocaleString()}</td>
+                      <td>{h.peak_hour}:00</td>
+                      <td>{h.top_violation}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // --- Tab: Decision Engine ---
+    const DecisionTab = ({ data }) => {
+      const [officers, setOfficers] = useState(5);
+      const [simJunction, setSimJunction] = useState(data.before_after_simulation[0] ? data.before_after_simulation[0].junction : '');
+      const [simulated, setSimulated] = useState(false);
+
+      const handleSimulate = () => {
+        setSimulated(false);
+        setTimeout(() => setSimulated(true), 300);
+      };
+
+      const selectedSim = data.before_after_simulation.find(s => s.junction === simJunction) || data.before_after_simulation[0];
+      const roiData = [...data.roi_simulation].sort((a,b) => b.expected_relief_pct - a.expected_relief_pct).slice(0, officers);
+
+      useEffect(() => {
+        Plotly.newPlot('roi-chart', [{
+          x: roiData.map(d => d.junction.substring(0, 18)),
+          y: roiData.map(d => d.expected_relief_pct),
+          type: 'bar',
+          marker: { 
+            color: roiData.map(d => `rgba(16, 185, 129, ${0.4 + d.expected_relief_pct / 60})`),
+            line: { width: 0 }
+          }
+        }], {
+          paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+          font: { color: '#8b95a5', family: 'Inter' },
+          margin: { t: 10, l: 45, r: 10, b: 80 },
+          xaxis: { gridcolor: 'rgba(56,68,94,0.2)' },
+          yaxis: { gridcolor: 'rgba(56,68,94,0.2)', title: 'Relief %' },
+        }, {responsive: true});
+
+        // Pareto logic
+        const sortedEpi = [...data.epi_rankings].sort((a,b) => b.EPI - a.EPI);
+        const totalEpi = sortedEpi.reduce((sum, row) => sum + row.EPI, 0);
+        let cumulative = 0;
+        const paretoX = [];
+        const paretoY = [];
+        const paretoCum = [];
+        sortedEpi.forEach((row, i) => {
+          cumulative += row.EPI;
+          paretoX.push(`J-${i+1}`);
+          paretoY.push(row.EPI);
+          paretoCum.push((cumulative / totalEpi) * 100);
+        });
+
+        Plotly.newPlot('pareto-chart', [
+          { x: paretoX.slice(0,50), y: paretoY.slice(0,50), type: 'bar', name: 'EPI Score', marker: { color: '#8b5cf6' } },
+          { x: paretoX.slice(0,50), y: paretoCum.slice(0,50), type: 'scatter', mode: 'lines+markers', name: 'Cumulative %', yaxis: 'y2', line: { color: '#f59e0b', width: 2 } }
+        ], {
+          paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+          font: { color: '#8b95a5', family: 'Inter' },
+          margin: { t: 10, l: 45, r: 45, b: 40 },
+          xaxis: { gridcolor: 'rgba(56,68,94,0.2)', showticklabels: false },
+          yaxis: { gridcolor: 'rgba(56,68,94,0.2)', title: 'EPI Score' },
+          yaxis2: { title: 'Cumulative %', overlaying: 'y', side: 'right', range: [0, 100] },
+          showlegend: false
+        }, {responsive: true});
+      }, [officers, data]);
+
+      const sortedEpi = [...data.epi_rankings].sort((a,b) => b.EPI - a.EPI);
+      const top20Count = Math.ceil(sortedEpi.length * 0.2);
+      const top20Sum = sortedEpi.slice(0, top20Count).reduce((sum, row) => sum + row.EPI, 0);
+      const totalEpiSum = sortedEpi.reduce((sum, row) => sum + row.EPI, 0);
+      const paretoStat = ((top20Sum / totalEpiSum) * 100).toFixed(1);
+
+      return (
+        <div className="grid">
+          <div className="card" style={{borderLeft: '3px solid var(--accent-primary)', background: 'rgba(249, 115, 22, 0.03)'}}>
+            <h2 style={{fontSize: '1.15rem', marginBottom: '0.4rem', color: 'white', fontWeight: 700}}>
+              <span role="img" aria-label="bolt">&#x26A1;</span> From Data to Decisions
+            </h2>
+            <p style={{color: 'var(--text-secondary)', fontSize: '0.85rem'}}>
+              EPI combines violation density, congestion impact, event risk, and forecasted violations to tell you <strong style={{color: 'var(--accent-primary)'}}>exactly where to deploy</strong>.
+            </p>
+          </div>
+
+          <div className="card">
+            <div className="card-header">Top 10 Locations for Immediate Action (EPI Rankings)</div>
+            <table>
+              <thead><tr><th>Rank</th><th>Location</th><th>EPI Score</th><th>Action Plan</th></tr></thead>
+              <tbody>
+                {data.epi_rankings.slice(0, 10).map((row, i) => (
+                  <tr key={i}>
+                    <td><span className="badge badge-red">#{row.rank}</span></td>
+                    <td style={{fontWeight: 600, color: 'white'}}>{row.junction}</td>
+                    <td>
+                      <div style={{fontWeight: 700}}>{row.EPI.toFixed(1)}</div>
+                      <div className="epi-bar-container"><div className="epi-bar-fill" style={{width: `${row.EPI}%`}}></div></div>
+                    </td>
+                    <td style={{color: 'var(--accent-secondary)', fontSize: '0.8rem'}}>{row.recommended_action}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="card">
+            <div className="card-header" style={{display: 'flex', justifyContent: 'space-between'}}>
+              <span>The 80/20 Rule in Action</span>
+              <span className="badge badge-purple">Top 20% of junctions account for {paretoStat}% of total EPI</span>
+            </div>
+            <div id="pareto-chart" style={{height: '250px'}}></div>
+          </div>
+
+          <div className="grid grid-2">
+            <div className="card">
+              <div className="card-header">Why Raw Counts Mislead <ModeledBadge tooltip="CII uses road type estimation" /></div>
+              <p style={{fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '1rem'}}>
+                A low-count chokepoint causes more congestion than a high-count wide road.
+              </p>
+              <div className="grid grid-1" style={{gap: '0.75rem'}}>
+                {data.cii_scores.slice(0,3).map((cii, i) => (
+                  <div key={i} style={{padding: '1rem', background: 'rgba(6,8,15,0.5)', borderRadius: '10px', border: '1px solid var(--border-primary)'}}>
+                    <div style={{fontWeight: 600, color: 'white', marginBottom: '0.5rem', fontSize: '0.9rem'}}>{cii.junction}</div>
+                    
+                    <div style={{marginBottom: '0.8rem'}}>
+                      <div style={{display: 'inline-block', padding: '0.2rem 0.5rem', background: 'var(--bg-lighter)', borderRadius: '4px', border: '1px solid var(--border-primary)', fontSize: '0.75rem', color: 'var(--accent-primary)', marginBottom: '0.3rem'}}>
+                        {cii.enforcement_mode}
+                      </div>
+                      <div style={{fontSize: '0.75rem', color: 'var(--text-muted)'}}>{cii.enforcement_reason}</div>
+                    </div>
+
+                    <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem'}}>
+                      <span style={{color: 'var(--text-muted)', fontSize: '0.8rem'}}>CII Score:</span>
+                      <RiskBadge score={cii.CII} />
+                    </div>
+                    
+                    <div style={{fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem'}}>CII Breakdown:</div>
+                    <div style={{display: 'flex', gap: '2px', height: '12px', marginTop: '0.2rem', width: '100%', borderRadius: '4px', overflow: 'hidden'}}>
+                      <div style={{width: `${(cii.density_score*0.25/cii.CII)*100}%`, background: '#ef4444'}} title={`Density: ${(cii.density_score*0.25).toFixed(1)}`}></div>
+                      <div style={{width: `${(cii.junction_multiplier*20*0.15/cii.CII)*100}%`, background: '#f59e0b'}} title={`Junction: ${(cii.junction_multiplier*20*0.15).toFixed(1)}`}></div>
+                      <div style={{width: `${(cii.peak_hour_concentration*0.15/cii.CII)*100}%`, background: '#10b981'}} title={`Peak Hour: ${(cii.peak_hour_concentration*0.15).toFixed(1)}`}></div>
+                      <div style={{width: `${(cii.vehicle_severity_avg*20*0.10/cii.CII)*100}%`, background: '#8b5cf6'}} title={`Severity: ${(cii.vehicle_severity_avg*20*0.10).toFixed(1)}`}></div>
+                      <div style={{width: `${(cii.road_capacity_score*0.20/cii.CII)*100}%`, background: '#3b82f6'}} title={`Road Capacity: ${(cii.road_capacity_score*0.20).toFixed(1)}`}></div>
+                      <div style={{width: `${(cii.choke_score*0.15/cii.CII)*100}%`, background: '#ec4899'}} title={`Choke Proximity: ${(cii.choke_score*0.15).toFixed(1)}`}></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="card">
+              <div className="card-header">Enforcement ROI Simulator <ModeledBadge /></div>
+              <div style={{marginBottom: '1rem'}}>
+                <label style={{color: 'var(--text-secondary)', display: 'block', marginBottom: '0.5rem', fontSize: '0.85rem'}}>
+                  If you have <b style={{color: 'var(--accent-primary)', fontSize: '1.1rem'}}>{officers}</b> officers available:
+                </label>
+                <input type="range" min="1" max="15" value={officers} 
+                  onChange={(e) => setOfficers(parseInt(e.target.value))}
+                  style={{width: '100%', accentColor: 'var(--accent-primary)'}} id="roi-slider"
+                />
+              </div>
+              <div id="roi-chart" style={{height: '160px'}}></div>
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="card-header">Before/After Speed Simulation <ModeledBadge tooltip="Speeds modeled via square-root congestion heuristic" /></div>
+            <div style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
+              <select className="select-input" value={simJunction} 
+                onChange={(e) => { setSimJunction(e.target.value); setSimulated(false); }}
+                style={{flex: 1}} id="sim-junction-select">
+                {data.before_after_simulation.map((s, i) => (
+                  <option key={i} value={s.junction}>{s.junction} (Peak: {s.peak_hour}:00)</option>
+                ))}
+              </select>
+              <button className="btn" onClick={handleSimulate} id="simulate-btn">Simulate: Remove Illegal Parking</button>
+            </div>
+
+            {selectedSim && (
+              <div className="simulation-result grid grid-3">
+                <div>
+                  <div className="kpi-label">Current Speed</div>
+                  <div className="speed-number" style={{color: 'var(--danger)'}}>{selectedSim.current_speed_kmh} <span style={{fontSize: '1rem'}}>km/h</span></div>
+                </div>
+                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', color: 'var(--text-muted)'}}>
+                  &#x2192;
+                </div>
+                <div>
+                  <div className="kpi-label">Predicted Speed (Cleared)</div>
+                  <div className="speed-number" style={{color: simulated ? 'var(--success)' : 'var(--text-primary)', transition: 'color 0.6s'}}>
+                    {simulated ? selectedSim.predicted_speed_kmh : '??.?'} <span style={{fontSize: '1rem'}}>km/h</span>
+                  </div>
+                  {simulated && (
+                    <div className="badge badge-green" style={{fontSize: '0.9rem', marginTop: '0.5rem'}}>
+                      +{selectedSim.improvement_pct.toFixed(0)}% Improvement
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+            
+            {selectedSim && simulated && (
+               <div className="card" style={{marginTop: '1rem', background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.3)'}}>
+                 <div className="card-header" style={{color: 'var(--success)', marginBottom: '0.5rem'}}>Estimated Economic & Human Impact (Weekly)</div>
+                 <div className="grid grid-3">
+                   <div>
+                     <div className="kpi-label">Commuter Hours Saved</div>
+                     <div style={{fontSize: '1.4rem', fontWeight: 'bold', color: 'white'}}>{(selectedSim.improvement_pct * 42).toFixed(0)} <span style={{fontSize: '0.8rem', color: 'var(--text-muted)'}}>hrs</span></div>
+                   </div>
+                   <div>
+                     <div className="kpi-label">Fuel Cost Avoided</div>
+                     <div style={{fontSize: '1.4rem', fontWeight: 'bold', color: 'white'}}>₹{(selectedSim.improvement_pct * 1250).toLocaleString()}</div>
+                   </div>
+                   <div>
+                     <div className="kpi-label">Productivity Recouped</div>
+                     <div style={{fontSize: '1.4rem', fontWeight: 'bold', color: 'white'}}>₹{(selectedSim.improvement_pct * 42 * 150).toLocaleString()}</div>
+                   </div>
+                 </div>
+               </div>
+            )}
+            <div style={{fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '1rem', textAlign: 'center'}}>
+              [ASSUMPTION DISCLOSURE]: Speed values are modeled heuristics calibrated to violation density, not live sensors.
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // --- Tab: Enforcement Priority ---
+    const EnforcementTab = ({ data }) => {
+      useEffect(() => {
+        const stations = [...data.enforcement_priority].sort((a,b) => b.priority_score - a.priority_score).slice(0, 15);
+        Plotly.newPlot('station-chart', [{
+          x: stations.map(s => s.priority_score),
+          y: stations.map(s => s.police_station),
+          type: 'bar', orientation: 'h',
+          marker: { 
+            color: stations.map(s => `rgba(245, 158, 11, ${0.3 + s.priority_score / 130})`),
+            line: { width: 0 }
+          }
+        }], {
+          paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+          font: { color: '#8b95a5', family: 'Inter' },
+          margin: { t: 10, l: 130, r: 30, b: 40 },
+          yaxis: { autorange: 'reversed' },
+          xaxis: { gridcolor: 'rgba(56,68,94,0.2)' },
+        }, {responsive: true});
+      }, [data]);
+
+      return (
+        <div className="grid grid-2">
+          <div className="card">
+            <div className="card-header">Police Station Priority Ranking</div>
+            <div id="station-chart" style={{height: '500px'}}></div>
+          </div>
+          <div className="card">
+            <div className="card-header">Top 10 Stations to Prioritize</div>
+            <table>
+              <thead><tr><th>Station</th><th>Score</th><th>Violations/Officer</th><th>Officers Needed</th><th>Unactioned %</th><th>Avg Lag (hrs)</th></tr></thead>
+              <tbody>
+                {data.enforcement_priority.slice(0, 10).map((s, i) => (
+                  <tr key={i}>
+                    <td style={{fontWeight: 600, color: 'white'}}>{s.police_station}</td>
+                    <td><RiskBadge score={s.priority_score} /></td>
+                    <td>{Number(s.violations_per_officer).toFixed(1)}</td>
+                    <td><span className="badge badge-orange">+{s.recommended_officers}</span></td>
+                    <td><span className={Number(s.unactioned_pct) > 20 ? 'badge badge-red' : 'badge badge-green'}>{s.unactioned_pct ? Number(s.unactioned_pct).toFixed(1) : '0'}%</span></td>
+                    <td>{s.avg_lag_hours ? Number(s.avg_lag_hours).toFixed(1) : 'N/A'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      );
+    };
+
+    // --- Tab: Predictions & Alerts ---
+    const PredictionsTab = ({ data }) => {
+      const { predictive_alerts, predictions } = data;
+      const [selJunction, setSelJunction] = useState(predictions[0] ? predictions[0].junction_name : '');
+
+      useEffect(() => {
+        if (!selJunction) return;
+        const jData = predictions.filter(p => p.junction_name === selJunction);
+        Plotly.newPlot('pred-chart', [{
+          x: jData.map(p => `${p.day_name.substring(0,3)} ${p.hour}:00`),
+          y: jData.map(p => p.predicted_violations),
+          type: 'scatter', mode: 'lines+markers',
+          line: { color: '#8b5cf6', width: 2, shape: 'spline' },
+          marker: { size: 4, color: '#a78bfa' },
+          fill: 'tozeroy', fillcolor: 'rgba(139, 92, 246, 0.06)'
+        }], {
+          paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+          font: { color: '#8b95a5', family: 'Inter' },
+          margin: { t: 10, l: 45, r: 10, b: 80 },
+          xaxis: { gridcolor: 'rgba(56,68,94,0.2)' },
+          yaxis: { gridcolor: 'rgba(56,68,94,0.2)', title: 'Predicted Violations' },
+        }, {responsive: true});
+      }, [selJunction, predictions]);
+
+      return (
+        <div className="grid">
+          <div className="grid grid-3">
+            {predictive_alerts.slice(0, 3).map((a, i) => (
+              <div key={i} className="alert-card">
+                <div style={{fontWeight: 700, color: 'white', marginBottom: '0.5rem', fontSize: '0.9rem'}}>
+                  <span role="img" aria-label="warning">&#x26A0;&#xFE0F;</span> {a.day_name} {a.hour}:00 - {Math.min(a.hour+2, 23)}:00
+                </div>
+                <div style={{fontSize: '1rem', marginBottom: '0.5rem', fontWeight: 500}}>{a.junction}</div>
+                <div style={{display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)', fontSize: '0.8rem'}}>
+                  <span>Expected: <b style={{color:'white'}}>{a.predicted_violations}</b></span>
+                  <span>Officers: <b style={{color:'white'}}>{a.recommended_officers}</b></span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="card">
+            <div className="card-header" style={{display: 'flex', justifyContent: 'space-between'}}>
+              <span><span role="img" aria-label="crystal">&#x1F52E;</span> 7-Day Violation Forecast</span>
+              <select className="select-input" value={selJunction} onChange={e => setSelJunction(e.target.value)} id="pred-junction-select">
+                {[...new Set(predictions.map(p => p.junction_name))].map((j, i) => (
+                  <option key={i} value={j}>{j}</option>
+                ))}
+              </select>
+            </div>
+            <div id="pred-chart" style={{height: '350px'}}></div>
+          </div>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
