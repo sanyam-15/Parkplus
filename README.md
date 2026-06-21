@@ -100,9 +100,8 @@ sequenceDiagram
 parkpulse/
 ├── dashboard/               # Frontend React/HTML application
 │   └── index.html           # Main dashboard entry point
-├── data/                    # Datasets (Place raw CSVs here)
+├── data/                    # Datasets (Place raw CSV here)
 │   ├── jan_to_may_police_violation_anonymized.csv
-│   └── Astram_event_data_anonymized.csv
 ├── outputs/                 # Generated artifacts, models, & reports
 │   ├── dashboard_data.json
 │   ├── hotspot_map.html
@@ -128,13 +127,6 @@ parkpulse/
 id,latitude,longitude,location,vehicle_number,vehicle_type,violation_type,created_datetime
 FKID000000,12.9255567,77.618665,"18th Main Road...",FKN00GL0000,CAR,"[""WRONG PARKING""]",2023-11-20 00:28:46+00
 FKID000001,12.9054633,77.7007781,"Sarjapura Main Road...",FKN00GL0001,CAR,"[""NO PARKING""]",2023-11-24 22:46:46+00
-```
-
-**2. Astram Event Data (`Astram_event_data_anonymized.csv`)**
-```csv
-id,event_type,latitude,longitude,address,event_cause,start_datetime,status
-FKID000000,unplanned,13.0400041,77.5180991,"Mumbai Bengaluru Highway...",vehicle_breakdown,2024-03-07 17:01:48,closed
-FKID000001,unplanned,12.9218755,77.6451585,"19th Main Road...",vehicle_breakdown,2024-01-30 04:07:24,resolved
 ```
 
 ---
