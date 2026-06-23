@@ -28,10 +28,13 @@ Park+ comes with an integrated, intelligent **AI Copilot** designed to empower t
 
 | Dashboard Overview | Dashboard Details |
 | :---: | :---: |
-| <img src="images/dashboad1.png" width="100%" /> | <img src="images/dashboard2.png" width="100%" /> |
-| <img src="images/dashboard3.png" width="100%" /> | <img src="images/dashboard4.png" width="100%" /> |
-| <img src="images/dashboard5.png" width="100%" /> | <img src="images/dashboard6.png" width="100%" /> |
-| <img src="images/dashboard7.png" width="100%" /> | <img src="images/dashboard8.png" width="100%" /> |
+| <img src="images/dashboad.png" width="100%" /> | <img src="images/dashboard1.png" width="100%" /> |
+| <img src="images/dashboard2.png" width="100%" /> | <img src="images/dashboard3.png" width="100%" /> |
+| <img src="images/dashboard4.png" width="100%" /> | <img src="images/dashboard6.png" width="100%" /> |
+| <img src="images/dashboard5.png" width="100%" /> | <img src="images/dashboard8.png" width="100%" /> |
+| <img src="images/dashboard6.png" width="100%" /> | <img src="images/dashboard8.png" width="100%" /> |
+| <img src="images/dashboard9.png" width="100%" /> | <img src="images/dashboard8.png" width="100%" /> |
+| <img src="images/dashboard10.png" width="100%" /> | <img src="images/dashboard8.png" width="100%" /> |
 
 ### Hotspot Map
 ![Hotspot Map](images/hotspotmap.png)
